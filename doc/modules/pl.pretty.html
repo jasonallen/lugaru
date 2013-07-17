@@ -1,0 +1,281 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>Reference</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>ldoc</h1>
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Functions">Functions</a></li>
+</ul>
+
+
+<h2>Modules</h2>
+<ul>
+  <li><a href="../modules/Scene.html">Scene</a></li>
+  <li><a href="../modules/SceneMgr.html">SceneMgr</a></li>
+  <li><a href="../modules/doctest.html">doctest</a></li>
+  <li><a href="../modules/pl.html">pl</a></li>
+  <li><a href="../modules/pl.Date.html">pl.Date</a></li>
+  <li><a href="../modules/pl.List.html">pl.List</a></li>
+  <li><a href="../modules/pl.Map.html">pl.Map</a></li>
+  <li><a href="../modules/pl.MultiMap.html">pl.MultiMap</a></li>
+  <li><a href="../modules/pl.OrderedMap.html">pl.OrderedMap</a></li>
+  <li><a href="../modules/pl.Set.html">pl.Set</a></li>
+  <li><a href="../modules/pl.app.html">pl.app</a></li>
+  <li><a href="../modules/pl.array2d.html">pl.array2d</a></li>
+  <li><a href="../modules/pl.class.html">pl.class</a></li>
+  <li><a href="../modules/pl.compat.html">pl.compat</a></li>
+  <li><a href="../modules/pl.comprehension.html">pl.comprehension</a></li>
+  <li><a href="../modules/pl.config.html">pl.config</a></li>
+  <li><a href="../modules/pl.data.html">pl.data</a></li>
+  <li><a href="../modules/pl.dir.html">pl.dir</a></li>
+  <li><a href="../modules/pl.file.html">pl.file</a></li>
+  <li><a href="../modules/pl.func.html">pl.func</a></li>
+  <li><a href="../modules/pl.import_into.html">pl.import_into</a></li>
+  <li><a href="../modules/pl.input.html">pl.input</a></li>
+  <li><a href="../modules/pl.lapp.html">pl.lapp</a></li>
+  <li><a href="../modules/pl.lexer.html">pl.lexer</a></li>
+  <li><a href="../modules/pl.luabalanced.html">pl.luabalanced</a></li>
+  <li><a href="../modules/pl.operator.html">pl.operator</a></li>
+  <li><a href="../modules/pl.path.html">pl.path</a></li>
+  <li><a href="../modules/pl.permute.html">pl.permute</a></li>
+  <li><strong>pl.pretty</strong></li>
+  <li><a href="../modules/pl.seq.html">pl.seq</a></li>
+  <li><a href="../modules/pl.sip.html">pl.sip</a></li>
+  <li><a href="../modules/pl.strict.html">pl.strict</a></li>
+  <li><a href="../modules/pl.stringio.html">pl.stringio</a></li>
+  <li><a href="../modules/pl.stringx.html">pl.stringx</a></li>
+  <li><a href="../modules/pl.tablex.html">pl.tablex</a></li>
+  <li><a href="../modules/pl.template.html">pl.template</a></li>
+  <li><a href="../modules/pl.test.html">pl.test</a></li>
+  <li><a href="../modules/pl.text.html">pl.text</a></li>
+  <li><a href="../modules/pl.utils.html">pl.utils</a></li>
+  <li><a href="../modules/pl.xml.html">pl.xml</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Module <code>pl.pretty</code></h1>
+
+<p>Pretty-printing Lua tables.</p>
+<p> Also provides a sandboxed Lua table reader and
+ a function to present large numbers in human-friendly format.</p>
+
+<p> Dependencies: <a href="../modules/pl.utils.html#">pl.utils</a> , <a href="../modules/pl.lexer.html#">pl.lexer</a> </p>
+
+
+<h2><a href="#Functions">Functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#read">read&nbsp;(s)</a></td>
+	<td class="summary">read a string representation of a Lua table.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#load">load&nbsp;(s, env, paranoid)</a></td>
+	<td class="summary">read a Lua chunk.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#write">write&nbsp;(tbl, space, not_clever)</a></td>
+	<td class="summary">Create a string representation of a Lua table.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#dump">dump&nbsp;(t, ...)</a></td>
+	<td class="summary">Dump a Lua table out to a file or stdout.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#number">number&nbsp;(num, kind, prec)</a></td>
+	<td class="summary">format large numbers nicely for human consumption.</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2><a name="Functions"></a>Functions</h2>
+    <dl class="function">
+    <dt>
+    <a name = "read"></a>
+    <strong>read&nbsp;(s)</strong>
+    </dt>
+    <dd>
+    read a string representation of a Lua table.
+ Uses load(), but tries to be cautious about loading arbitrary code!
+ It is expecting a string of the form '{...}', with perhaps some whitespace
+ before or after the curly braces. A comment may occur beforehand.
+ An empty environment is used, and
+ any occurance of the keyword 'function' will be considered a problem.
+ in the given environment - the return value may be <code>nil</code>.
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">s</span>
+         {string} string of the form '{...}', with perhaps some whitespace
+ before or after the curly braces.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        a table
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "load"></a>
+    <strong>load&nbsp;(s, env, paranoid)</strong>
+    </dt>
+    <dd>
+    read a Lua chunk.
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">s</span>
+         Lua code</li>
+        <li><span class="parameter">env</span>
+         optional environment</li>
+        <li><span class="parameter">paranoid</span>
+         prevent any looping constructs and disable string methods</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        the environment
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "write"></a>
+    <strong>write&nbsp;(tbl, space, not_clever)</strong>
+    </dt>
+    <dd>
+    Create a string representation of a Lua table.
+  This function never fails, but may complain by returning an
+  extra value. Normally puts out one item per line, using
+  the provided indent; set the second parameter to '' if
+  you want output on one line.
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">tbl</span>
+         {table} Table to serialize to a string.</li>
+        <li><span class="parameter">space</span>
+
+<p> {string} (optional) The indent to use.</p>
+<pre><code>Defaults to two spaces; make it the empty string for no indentation
+</code></pre>
+</li>
+        <li><span class="parameter">not_clever</span>
+
+<p> {bool} (optional) Use for plain output, e.g {['key']=1}.</p>
+<pre><code>Defaults to false.
+</code></pre>
+</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+        <li>
+        a string</li>
+        <li>
+        a possible error message</li>
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "dump"></a>
+    <strong>dump&nbsp;(t, ...)</strong>
+    </dt>
+    <dd>
+    Dump a Lua table out to a file or stdout.
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">t</span>
+         {table} The table to write to a file or stdout.</li>
+        <li><span class="parameter">...</span>
+
+<p> {string} (optional) File name to write too. Defaults to writing</p>
+<pre><code>to stdout.
+</code></pre>
+</li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "number"></a>
+    <strong>number&nbsp;(num, kind, prec)</strong>
+    </dt>
+    <dd>
+    format large numbers nicely for human consumption.
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">num</span>
+         a number</li>
+        <li><span class="parameter">kind</span>
+         one of 'M' (memory in KiB etc), 'N' (postfixes are 'K','M' and 'B')
+ and 'T' (use commas as thousands separator)</li>
+        <li><span class="parameter">prec</span>
+         number of digits to use for 'M' and 'N' (default 1)</li>
+    </ul>
+
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.3.12</a></i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>

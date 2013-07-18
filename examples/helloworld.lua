@@ -1,7 +1,6 @@
 package.path = package.path .. ";src/?.lua"
 
 local L = require 'lugaru'
-
 L.init(320, 480)
 
 local setup = function(scene)
@@ -11,5 +10,4 @@ local setup = function(scene)
   scene:addEntity(e)
 end
 
-local scene = L.Scene("main", setup)
-scene:start()
+L.Scene("main", setup):start()

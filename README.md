@@ -11,7 +11,7 @@ A component-entity framework built on Moai. It makes PC and Mobile game developm
   * Very, very fast - Built in portable C++
 * [Component-Entity](http://en.wikipedia.org/wiki/Entity_component_system)-based framework: clean, simple, DRY code.
 * [Well-documented](https://jasonallen.github.com/lugaru): source code is well documented, tutorials, code samples.
-* The framework is well tested.
+* The framework is well tested (travis integration pending)
 
 ### Example
 

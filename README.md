@@ -4,13 +4,14 @@ A component-entity framework built on Moai. It makes PC and Mobile game developm
 
 ### Features
 
-* [Moai-based](http://getmoai.com/ "GetMoai!"), which means:
+* The framework is built on [Moai](http://getmoai.com/ "GetMoai!"), which means:
   * Works on PC, OSX, iphone & Android
+  * Fast development cycle on PC/Mac, easy porting to mobile later
   * Extremely powerful and flexible (sprites, tiles, particles, physics and much, much more...)
   * Very, very fast - Built in portable C++
-* [Component-Entity](http://en.wikipedia.org/wiki/Entity_component_system)-based framework
-* Well-documented: tutorials, code samples, etc...
-* Well-tested
+* [Component-Entity](http://en.wikipedia.org/wiki/Entity_component_system)-based framework: clean, simple, DRY code.
+* [Well-documented](https://jasonallen.github.com/lugaru): source code is well documented, tutorials, code samples.
+* The framework is well tested.
 
 ### Example
 

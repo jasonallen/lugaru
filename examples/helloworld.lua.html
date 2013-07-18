@@ -22,10 +22,14 @@
 
   <section id="doc">
     <nav>
+				<h1>Examples</h1>
+				<ul>
+					<li class="selected"><a href="#">helloworld.lua</a></li>
+				</ul>
 				<h1>Modules</h1>
 				<ul>
 					<li class="unselected"><a href="../modules/Entity.html">Entity</a></li>
-					<li class="selected"><a href="#">Lugaru</a></li>
+					<li class="unselected"><a href="../modules/Lugaru.html">Lugaru</a></li>
 					<li class="unselected"><a href="../modules/Scene.html">Scene</a></li>
 					<li class="unselected"><a href="../modules/SceneMgr.html">SceneMgr</a></li>
 				</ul>
@@ -34,51 +38,34 @@
 					<li class="unselected"><a href="../topics/01-introduction.md.html">01-introduction.md</a></li>
 					<li class="unselected"><a href="../topics/02-hello-world.md.html">02-hello-world.md</a></li>
 				</ul>
-				<h1>Examples</h1>
-				<ul>
-					<li class="unselected"><a href="../examples/helloworld.lua.html">helloworld.lua</a></li>
-				</ul>
 
     </nav>
 
   <section id="content">
     <section id="start">
       <header>
-				<h1>Module <code>Lugaru</code></h1>
+				<h1>Example <code>helloworld.lua</code></h1>
 
-				<p>Lugaru is the toplevel framework namespace.</p>
-				<p> It includes most related resources off of it.</p>
+				<pre>
+<span class="global">package</span>.path = <span class="global">package</span>.path .. <span class="string">";src/?.lua"</span>
+
+<span class="keyword">local</span> L = <span class="global">require</span> <span class="string">'lugaru'</span>
+L.init(<span class="number">320</span>, <span class="number">480</span>)
+
+<span class="keyword">local</span> setup = <span class="keyword">function</span>(scene)
+  <span class="keyword">local</span> e = L.Entity()
+  e:addComponent(L.Position(<span class="number">0</span>,<span class="number">0</span>))
+  e:addComponent(L.Sprite(<span class="string">"examples/foo.png"</span>, <span class="number">128</span>, <span class="number">128</span>))
+  scene:addEntity(e)
+<span class="keyword">end</span>
+
+L.Scene(<span class="string">"main"</span>, setup):start()</pre>
+
       </header>
 
 			<section id="details">
 			<article>
 
-    <h2><a name="Functions"></a>Functions</h2>
-
-    <dl class="function">
-    <dt>
-    <a name = "init"></a>
-    <strong>init&nbsp;(width, height)</strong>
-    </dt>
-    <dd>
-      One-time initialization of Lugaru. <br />
- This is required for non-mobile environments.
-
-    <h3>Parameters:</h3>
-    <ul>
-       <li><code><em>width</em></code>:  width of window, in pixels</li>
-       <li><code><em>height</em></code>:  width of window, in pixels</li>
-    </ul>
-
-
-    <h3>Usage:</h3>
-    <ul>
-				<section class="code-example"><div class="terminal-wrap"><pre><code><span class="highlight_js lua">local L = require 'lugaru'
- L.init(640, 480)</span></code></pre></div></section>
-    </ul>
-
-</dd>
-</dl>
 
 			</article>
     </section>

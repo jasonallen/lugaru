@@ -1,5 +1,5 @@
 package.path = package.path .. ";src/?.lua"
-package.path = package.path .. ';../src/?.lua'
+
 local L = require 'lugaru'
 local Position = require 'components.position'
 

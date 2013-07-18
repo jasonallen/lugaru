@@ -20,6 +20,7 @@ build-moai:
 	cd moai-dev/
 	ls -la
 	cat .git/refs/heads/master
+	cat .git/config
 	cd cmake/
 	cmake .
 	make

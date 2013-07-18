@@ -17,19 +17,20 @@ function Entity:_init()
 end
 
 ---------------
--- Will attach a component to an entity.
--- @usage
--- local e = L.Entity()
--- local p = L.Position(0, 0)
--- e.addComponent(p)
+--Will attach a component to an entity.
+--@param component The component being added to the entity
+--@usage
+--local e = L.Entity()
+--local p = L.Position(0, 0)
+--e.addComponent(p)
 function Entity:addComponent(component)
   self.components:append(component)
 end
 
 ---------------
--- Will fetch an attached component (or return nil if not present).
--- @usage
--- local p = e.getComponent(L.Position)
+--Will fetch an attached component (or return nil if not present).
+--@usage
+--local p = e.getComponent(L.Position)
 function Entity:getComponent(klass)
   for component in self.components:iter() do
     if component:is_a(klass) then
@@ -40,11 +41,11 @@ function Entity:getComponent(klass)
 end
 
 ---------------
--- Will invoke the callback function with each component attached to this entity
--- @usage
--- entity:eachComponent(function(component)
---   print("...and more more component!")
--- end)
+--Will invoke the callback function with each component attached to this entity
+--@usage
+--entity:eachComponent(function(component)
+--  print("...and more more component!")
+--end)
 function Entity:eachComponent(fn)
   for component in self.components:iter() do
     fn(component)

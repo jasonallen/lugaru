@@ -17,13 +17,7 @@ helloworld:
 build-moai:
 	sudo apt-get install freeglut3 libxmu-dev libxi-dev cmake build-essential zlib1g-dev
 	git clone --depth=1 git://github.com/moai/moai-dev.git
-	cd moai-dev/
-	ls -la
-	cat .git/refs/heads/master
-	cat .git/config
-	cd cmake/
-	cmake .
-	make
+	cd moai-dev/cmake && cmake . && make
 .PHONY: build-moai
 
 install-busted:

@@ -11,8 +11,8 @@ local M = {}
 local SceneMgr = class()
 
 function SceneMgr:_init()
-	-- scenes enable easy lookup by 'name' e.g. { "overlay" = <scene> }
-	self.scenes = {}
+  -- scenes enable easy lookup by 'name' e.g. { "overlay" = <scene> }
+  self.scenes = {}
 end
 
 -------------------------------------------------------------------------------
@@ -26,9 +26,9 @@ end
 -- local scene = L.sceneMgr.scenes["foo"] -- retrieves the fooScene!
 -- @param scene The scene to be added
 function SceneMgr:add(scene)
-	self.scenes[scene.name] = scene
-	self:setRenderTable()
-	scene:_added()
+  self.scenes[scene.name] = scene
+  self:setRenderTable()
+  scene:_added()
 end
 
 --- Define special sequences of characters.
@@ -37,25 +37,25 @@ end
 ---- It also creates an index for the table, according to the order of insertion.
 ---- @param scene The replacement pattern.
 function SceneMgr:remove(scene)
-	self.scenes[scene.name] = nil
-	self:setRenderTable()
-	scene:_removed()
+  self.scenes[scene.name] = nil
+  self:setRenderTable()
+  scene:_removed()
 end
 
 function SceneMgr:orderedScenes()
-	local result = {}
-	for _, scene in pairs(self.scenes) do
-		table.insert(result, scene)
-	end
-	table.sort(result)
-	return result
+  local result = {}
+  for _, scene in pairs(self.scenes) do
+    table.insert(result, scene)
+  end
+  table.sort(result)
+  return result
 end
 
 function SceneMgr:setRenderTable()
-	local moaiLayers = {}
-	for i, scene in ipairs(self:orderedScenes()) do
-		moaiLayers[#moaiLayers + 1] = scene.moaiLayer
-	end
+  local moaiLayers = {}
+  for i, scene in ipairs(self:orderedScenes()) do
+    moaiLayers[#moaiLayers + 1] = scene.moaiLayer
+  end
   MOAIRenderMgr.setRenderTable(moaiLayers)
 end
 

@@ -13,7 +13,7 @@ local Sprite = require 'components.sprite'
 local Entity = class()
 
 function Entity:_init()
-	self.components = List()
+  self.components = List()
 end
 
 ---------------
@@ -23,7 +23,7 @@ end
 -- local p = L.Position(0, 0)
 -- e.addComponent(p)
 function Entity:addComponent(component)
-	self.components:append(component)
+  self.components:append(component)
 end
 
 ---------------
@@ -31,12 +31,12 @@ end
 -- @usage
 -- local p = e.getComponent(L.Position)
 function Entity:getComponent(klass)
-	for component in self.components:iter() do
-		if component:is_a(klass) then
-			return component
-		end
-	end
-	return nil
+  for component in self.components:iter() do
+    if component:is_a(klass) then
+      return component
+    end
+  end
+  return nil
 end
 
 ---------------
@@ -46,9 +46,9 @@ end
 --   print("...and more more component!")
 -- end)
 function Entity:eachComponent(fn)
-	for component in self.components:iter() do
-		fn(component)
-	end
+  for component in self.components:iter() do
+    fn(component)
+  end
 end
 
 return Entity

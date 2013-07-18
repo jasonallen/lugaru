@@ -34,7 +34,7 @@ Lugaru.Position = Position
 -- local L = require 'lugaru'
 -- L.init(640, 480)
 function Lugaru.init(width, height)
-	Lugaru._init(width, height) -- defined in LugaruTable
+  Lugaru._init(width, height) -- defined in LugaruTable
 end
 
 return Lugaru

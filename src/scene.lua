@@ -1,13 +1,18 @@
 --------------
--- Scenes are a way of organizing objects. They represent distinct parts of the game.
--- These can be different screens or levels, or overlays. Scenes are rendered
--- by their priority. Scenes are setup and torn down by responding to their
--- 'added' and 'removed' callbacks.
+-- A Scene is a stage where things in your game appear and interact. You will typically have one scene active at a time. A typical game might have a "Menu" scene and a "Game" scene, for example. More advanced games may have a smaller scene overlayed on top of another scene - like a "CommandBar" scene shown at the bottom, on top of a "Game" Scene as is typical in RTS games. Scenes are responsible for setup up the entities at the beginning. Then they don't do anything, until it's time to clean up. They are therefore created by defining three things: a name, a setup function, and a teardown function.
 -- @usage
--- local MyScene = class(Scene)
--- function MyScene:added(sceneMgr)
--- sceneMgr:add(SpaceShipEntity())
+-- local L = require 'Lugaru'
+--
+-- local menuSetup = function(scene)
+--   -- create your entities here!
 -- end
+--
+-- local menuTeardown = function(scene)
+--   -- delete your entities here!
+-- end
+--
+-- local menuScene = L.Scene("Menu", menuSetup, menuTeardown)
+-- menuScene:play()
 -- @module Scene
 local class = require 'pl.class'
 local SceneMgr = require 'scene_mgr'
@@ -16,28 +21,30 @@ local LugaruTable = require 'lugaru_table'
 
 local Scene = class()
 
-function Scene:_init(name)
+function Scene:_init(name, setup, teardown)
   self.name = name
   self.priority = 0
   self.moaiLayer = MOAILayer.new()
   self.entities = List
   self.nextEntityID = 1
+  self.setup = setup
+  self.teardown = teardown
 end
 
 function Scene.__lt(a, b)
   return a.priority < b.priority
 end
 
-function Scene:_added()
-  if (self.added) then
-    self.moaiLayer:setViewport ( LugaruTable.viewport )
-    self:added()
+function Scene:_setup()
+  self.moaiLayer:setViewport ( LugaruTable.viewport )
+  if self.setup then
+    self:setup()
   end
 end
 
-function Scene:_removed()
-  if (self.removed) then
-    self:removed()
+function Scene:_teardown()
+  if (self.teardown) then
+    self:teardown()
   end
 end
 
@@ -79,11 +86,4 @@ function Scene:addEntity(e)
   end)
 end
 
-local SceneMaker = function(name, added, removed)
-  local s = Scene(name)
-  s.added = added
-  s.removed = removed
-  return s
-end
-
-return SceneMaker
+return Scene

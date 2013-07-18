@@ -28,7 +28,7 @@ end
 function SceneMgr:add(scene)
   self.scenes[scene.name] = scene
   self:setRenderTable()
-  scene:_added()
+  scene:_setup()
 end
 
 --- Define special sequences of characters.
@@ -39,7 +39,7 @@ end
 function SceneMgr:remove(scene)
   self.scenes[scene.name] = nil
   self:setRenderTable()
-  scene:_removed()
+  scene:_teardown()
 end
 
 function SceneMgr:orderedScenes()

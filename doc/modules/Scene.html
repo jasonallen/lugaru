@@ -3,7 +3,7 @@
 <html>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 <head>
-    <title>WTF</title>
+    <title>Reference</title>
     <link rel="stylesheet" href="../ldoc.css" type="text/css" />
 </head>
 <body>
@@ -50,18 +50,22 @@
 
 <h1>Module <code>Scene</code></h1>
 
-<p>Scenes are a way of organizing objects.</p>
-<p> They represent distinct parts of the game.
- These can be different screens or levels, or overlays. Scenes are rendered
- by their priority. Scenes are setup and torn down by responding to their
- 'added' and 'removed' callbacks.</p>
+<p>A Scene is a stage where things in your game appear and interact.</p>
+<p> You will typically have one scene active at a time. A typical game might have a "Menu" scene and a "Game" scene, for example. More advanced games may have a smaller scene overlayed on top of another scene - like a "CommandBar" scene shown at the bottom, on top of a "Game" Scene as is typical in RTS games. Scenes are responsible for setup up the entities at the beginning. Then they don't do anything, until it's time to clean up. They are therefore created by defining three things: a name, a setup function, and a teardown function.</p>
     <h3>Usage:</h3>
     <ul>
         <pre class="example">
- local MyScene = class(Scene)
- function MyScene:added(sceneMgr)
-   sceneMgr:add(SpaceShipEntity())
- end</pre>
+ local L = require &apos;Lugaru&apos;
+ local menuSetup = function(scene)
+   -- create your entities here!
+ end
+
+ local menuTeardown = function(scene)
+   -- delete your entities here!
+ end
+
+ local menuScene = L.Scene(&quot;Menu&quot;, menuSetup, menuTeardown)
+ menuScene:play()</pre>
     </ul>
 
 
@@ -102,7 +106,7 @@
     <ul>
         <pre class="example">
  <span class="keyword">local</span> s = Scene(<span class="string">"test"</span>)
- s:start()  -- scene is now visible <span class="keyword">and</span> playing</pre>
+ s:start() -- scene is now visible <span class="keyword">and</span> playing</pre>
     </ul>
 
 </dd>

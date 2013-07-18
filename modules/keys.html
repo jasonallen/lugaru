@@ -1,13 +1,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 <head>
     <title>Reference</title>
-    <link rel="stylesheet" href="../luadoc.css" type="text/css" />
-	<!--meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/-->
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
 </head>
-
 <body>
+
 <div id="container">
 
 <div id="product">
@@ -16,109 +16,51 @@
 	<div id="product_description"></div>
 </div> <!-- id="product" -->
 
+
 <div id="main">
 
+
+<!-- Menu -->
+
 <div id="navigation">
+<br/>
+<h1>ldoc</h1>
 
-
-<h1>LuaDoc</h1>
 <ul>
-	
-	<li><a href="../index.html">Index</a></li>
-	
-</ul>
-
-
-<!-- Module list -->
-
-<h1>Modules</h1>
-<ul>
-
-	<li><strong>keys</strong></li>
-	
+  <li><a href="../index.html">Index</a></li>
 </ul>
 
 
 
-<!-- File list -->
-
-<h1>Files</h1>
+<h2>Modules</h2>
 <ul>
-
-	<li>
-		<a href="../files/src/a_spec.html">src/a_spec.lua</a>
-	</li>
-
-	<li>
-		<a href="../files/src/class.html">src/class.lua</a>
-	</li>
-
-	<li>
-		<a href="../files/src/entity.html">src/entity.lua</a>
-	</li>
-
-	<li>
-		<a href="../files/src/lugaru.html">src/lugaru.lua</a>
-	</li>
-
-	<li>
-		<a href="../files/src/scene.html">src/scene.lua</a>
-	</li>
-
-	<li>
-		<a href="../files/src/scene_mgr.html">src/scene_mgr.lua</a>
-	</li>
-
-	<li>
-		<a href="../files/src/sprite_component.html">src/sprite_component.lua</a>
-	</li>
-
-	<li>
-		<a href="../files/src/test.html">src/test.lua</a>
-	</li>
-
+  <li><a href="../modules/SceneMgr.html">SceneMgr</a></li>
+  <li><a href="../modules/doctest.html">doctest</a></li>
+  <li><strong>keys</strong></li>
 </ul>
 
-
-
-
-
-
-</div><!-- id="navigation" -->
+</div>
 
 <div id="content">
 
 <h1>Module <code>keys</code></h1>
 
-<p>Manages key bindings in Textadept.  ## Overview  Define key bindings in the global `keys` table in key-value pairs. Each pair consists of either a string key sequence and its associated command, a string lexer language (from the *lexers/* directory) with a table of key sequences and commands, a string key mode with a table of key sequences and commands, or a key sequence with a table of more sequences and commands. The latter is part of what is called a "key chain", to be discussed below. When searching for a command to run based on a key sequence, Textadept considers key bindings in the current key mode to have priority. If no key mode is active, key bindings in the current lexer have priority, followed by the ones in the global table. This means if there are two commands with the same key sequence, Textadept runs the one specific to the current lexer. However, if the command returns the boolean value `false`, Textadept also runs the lower-priority command. (This is useful for language modules to override commands like Adeptsense autocompletion, but fall back to word autocompletion if the first command fails.)  ## Key Sequences  Key sequences are strings built from a combination of modifier keys and the key itself. Modifier keys are "Control", "Shift", and "Alt" on Windows, Linux, BSD, and in curses. On Mac OSX they are "Command" (`⌘`), "Alt/Option" (`⌥`), "Control" (`^`), and "Shift" (`⇧`). These modifiers have the following string representations:  Modifier | Linux / Win32 | Mac OSX | Terminal | ---------|---------------|---------|----------| Control  | `'c'`         | `'m'`   | `'c'`    | Alt      | `'a'`         | `'a'`   | `'m'`    | Shift    | `'s'`         | `'s'`   | `'s'`    | Command  | N/A           | `'c'`   | N/A      |  The string representation of key values less than 255 is the character that Textadept would normally insert if the "Control", "Alt", and "Command" modifiers were not held down. Therefore, a combination of `Ctrl+Alt+Shift+A` has the key sequence `caA` on Windows and Linux, but a combination of `Ctrl+Shift+Tab` has the key sequence `cs\t`. On a United States English keyboard, since the combination of `Ctrl+Shift+,` has the key sequence `c<` (`Shift+,` inserts a `<`), Textadept recognizes the key binding as `Ctrl+<`. This allows key bindings to be language and layout agnostic. For key values greater than 255, Textadept uses the [`KEYSYMS`](#KEYSYMS) lookup table. Therefore, `Ctrl+Right Arrow` has the key sequence `cright`. Uncommenting the `print()` statements in *core/keys.lua* causes Textadept to print key sequences to standard out (stdout) for inspection.  ## Commands  A command bound to a key sequence is either a Lua function or a table containing a Lua function with a set of arguments to pass. Examples are:  keys['cn'] = buffer.new keys['cs'] = buffer.save keys['a('] = {_M.textadept.editing.enclose, '(', ')'} keys['cu'] = function() io.snapopen(_USERHOME) end  (The function and function table syntax are functionally equivalent. You can use either.)  Textadept handles [`buffer`][] references properly in static contexts.  [`buffer`]: buffer.html  ## Modes  You can group together sets of key bindings into modes. When a key [mode](#MODE) is active, Textadept ignores all key bindings defined outside the mode until the mode is unset. Here is a simple vi mode example:  keys.command_mode = { ['h'] = buffer.char_left, ['j'] = buffer.line_up, ['k'] = buffer.line_down, ['l'] = buffer.char_right, ['i'] = function() keys.MODE = nil gui.statusbar_text = 'INSERT MODE' end } keys['esc'] = function() keys.MODE = 'command_mode' end events.connect(events.UPDATE_UI, function() if keys.MODE == 'command_mode' then return end gui.statusbar_text = 'INSERT MODE' end) keys.MODE = 'command_mode' -- default mode  ## Key Chains  Key chains are a powerful concept. They allow you to assign multiple key bindings to one key sequence. Language modules [use key chains](#LANGUAGE_MODULE_PREFIX) for their functions. By default, the `Esc` (`⎋` on Mac OSX | `Esc` in curses) key cancels a key chain, but you can redefine it via [`CLEAR`](#CLEAR). An example key chain looks like:  keys['aa'] = { a = function1, b = function2, c = {function3, arg1, arg2} }</p>
-
-
-
-
-
-
-
+<p>(no description)</p>
+<p></p>
 
 
 
 <br/>
 <br/>
-
-
-
-
 
 
 
 
 </div> <!-- id="content" -->
-
 </div> <!-- id="main" -->
-
 <div id="about">
-	<p><a href="http://validator.w3.org/check?uri=referer"><img src="http://www.w3.org/Icons/valid-xhtml10" alt="Valid XHTML 1.0!" height="31" width="88" /></a></p>
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.3.12</a></i>
 </div> <!-- id="about" -->
-
-</div> <!-- id="container" -->	
+</div> <!-- id="container" -->
 </body>
 </html>

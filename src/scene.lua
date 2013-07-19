@@ -16,7 +16,7 @@
 -- @module Scene
 local class = require 'pl.class'
 local SceneMgr = require 'scene_mgr'
-local List = require 'pl.list'
+local List = require 'pl.List'
 local LugaruTable = require 'lugaru_table'
 
 local Scene = class()

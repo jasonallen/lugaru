@@ -4,7 +4,7 @@
 -- local e = L.Entity()
 -- @module Entity
 local class = require 'pl.class'
-local List = require 'pl.list'
+local List = require 'pl.List'
 local pretty = require 'pl.pretty'
 local Component = require 'components.component'
 local Position = require 'components.position'

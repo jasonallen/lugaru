@@ -17,8 +17,9 @@ helloworld:
 build-moai:
 	sudo apt-get install aptitude
 	sudo aptitude install -y freeglut3-dev libglew-dev libglu1-mesa-dev libxmu-dev libxi-dev chipmunk-dev libjpeg8-dev libpng-dev libfreetype6-dev liblua5.1-0-dev libjansson-dev libtinyxml-dev libcurl4-openssl-dev zlib1g-dev libexpat1-dev cmake build-essential libasound2-dev libvorbis-dev libpulse-dev libasound2-dev
-	git clone --depth=1 https://github.com/spacepluk/moai-dev.git
-	cd moai-dev/cmake && cmake . && make
+	git clone -b linux-cmake git://github.com/spacepluk/moai-dev.git
+	mkdir moai-dev/build
+	cd moai-dev/build && cmake ../cmake && make -j
 .PHONY: build-moai
 
 build-moai-backup:

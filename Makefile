@@ -31,7 +31,7 @@ install-busted:
 .PHONY: install-busted
 
 travis-test-moai: build-moai install-busted
-	find . -name moai
+	find . -type f -name moai
 	moai-dev/cmake/moai/moai
 	busted -l $(MOAI) spec
 

@@ -2,6 +2,10 @@
 
 A component-entity framework built on Moai. It makes PC and Mobile game development productive and enjoyable. It combines the amazing power and portability of Moai with a simplified component-entity based programming model.
 
+##### Getting Started
+
+Your best bet is to head over to the [official lugaru docs](https://jasonallen.github.com/lugaru).
+
 ### Features
 
 * The framework is built on [Moai](http://getmoai.com/ "GetMoai!"), which means:

@@ -1,5 +1,5 @@
 LDOC=../../LDoc
-MOAI=moai-dev/cmake/moai/moai
+MOAI=moai-dev/cmake/src/hosts/moai-untz
 
 test: travis-test-moai
 
@@ -32,7 +32,7 @@ install-busted:
 
 travis-test-moai: build-moai install-busted
 	find . -type f -name moai-untz
-	moai-dev/cmake/moai/moai
+	moai-dev/cmake/src/hosts/moai-untz
 	busted -l $(MOAI) spec
 
 .PHONY: doc

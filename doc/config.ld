@@ -6,6 +6,6 @@ dir = 'out'
 topics = 'manual'
 examples = {'../examples'}
 format = 'markdown'
-template='../lib/ldox'
-style='../lib/ldox'
-file = '../src'
+template='../extras/ldox'
+style='../extras/ldox'
+file = {'../src', exclude = {'../src/pl'}}

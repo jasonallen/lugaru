@@ -1,4 +1,4 @@
-# ![Lugaru Logo](/logo.png "Lugaru!")Lugaru
+# ![Lugaru Logo](/logo.png "Lugaru!")Lugaru [![Build Status](https://travis-ci.org/jasonallen/lugaru.png)](https://travis-ci.org/jasonallen/lugaru)
 
 A component-entity framework built on Moai. It makes PC and Mobile game development productive and enjoyable. It combines the amazing power and portability of Moai with a simplified component-entity based programming model.
 

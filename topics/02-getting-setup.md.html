@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<title>Lugaru Documentation</title>
+	<link rel="stylesheet" href="../ldoc.css" type="text/css" />
+</head>
+
+<body id="documentation">
+
+
+  <div id="header">
+		<h1><img src="../img/logo.png"></img>Lugaru Documentation</h1>
+    <div class="navigation">
+      <ul class="global">
+        <li><a href="https://github.com/jasonallen/lugaru">Github</a></li>
+      </ul>
+		</div>
+  </div><!-- #header -->
+
+  <section id="doc">
+    <nav>
+				<h1>Topics</h1>
+				<ul>
+					<li class="unselected"><a href="../topics/01-introduction.md.html">01-introduction.md</a></li>
+					<li class="selected"><a href="#">02-getting-setup.md</a></li>
+				</ul>
+				<h1>Modules</h1>
+				<ul>
+					<li class="unselected"><a href="../modules/Entity.html">Entity</a></li>
+					<li class="unselected"><a href="../modules/Lugaru.html">Lugaru</a></li>
+					<li class="unselected"><a href="../modules/Scene.html">Scene</a></li>
+					<li class="unselected"><a href="../modules/SceneMgr.html">SceneMgr</a></li>
+				</ul>
+				<h1>Examples</h1>
+				<ul>
+					<li class="unselected"><a href="../examples/helloworld.lua.html">helloworld.lua</a></li>
+				</ul>
+
+    </nav>
+
+  <section id="content">
+    <section id="start">
+      <header>
+				<h1>Topic <code>02-getting-setup.md</code></h1>
+
+
+<h3>Getting Setup</h3>
+
+<p>Before we start coding, you need to make sure you have a working environment. We're going to build this app for PC/Mac/Linux first - then we'll port it to iOS/Android after. There are three main requirements to have before we start:</p>
+
+<ol>
+    <li>Moai: you need to have a moai host runner for your OS. It's going to be the program we invoke to run our game. We'll run moai and pass it our lua code: that's how it will run our game. We can embed our lua code into a single executable later - but this way we'll have the fastest code - run - debug cycle possible. To setup your Moai host:</li>
+    <li>Download the latest Moai SDK (from <a href="http://getmoai.com/sdk/moai-sdk-download.html">Tarball</a> or <a href="https://github.com/moai/moai-dev">Github</a> ).</li>
+    <li>Use the appropriate direcoty to invoke your platform-specific IDE/Compiler (XCode for OSX, vs20x0/Visual Studio for Windows, cmake for linux). The goal is to generate the "moai" host app. </li>
+    <li>Once you've built your "moai" host app add it to your path. Invoking it should emit something like this:</li>
+</ol>
+
+
+<pre>
+ $ moai
+ MOAI-OPEN DEBUG
+ Initializing Chipmunk v5.<span class="number">3.4</span> (Debug Enabled)
+ Compile with -DNDEBUG defined to disable <span class="global">debug</span> mode <span class="keyword">and</span> runtime assertion checks
+</pre>
+
+<p>2. Start your new project
+  1. Create a new project directory - call it lupac (for Lua Pacman - clever, right?)
+  2. Inside your lupac directory create a subdirectory called "src" and "img"
+  3. Copy the lugaru src directory inside of your lupac/src directory and rename it "lugaru", so it ends up looking like this</p>
+
+<pre>
+ lupac/
+   img/
+   src/
+     lugaru/
+       &lt;.. all the lugaru src code ..&gt;
+</pre>
+
+<p>  4. Copy this file http://2.bp.blogspot.com/<em>Gm1MOUisRyY/TAXOOglk</em>8I/AAAAAAAAuO4/2zEOzvaRTwk/s400/pac-man-logo.png to your img/ subdirectory. Make sure it's called pac-man-logo.png!
+  4. Create a file in your src/ directory called main.lua, and paste the following code:</p>
+
+
+<pre>
+ <span class="global">package</span>.path = <span class="global">package</span>.path .. <span class="string">";src/?.lua;src/lugaru/?.lua"</span>
+
+ <span class="keyword">local</span> L = <span class="global">require</span> <span class="string">'lugaru.lugaru'</span>
+ L.init(<span class="number">672</span>, <span class="number">864</span>)
+
+ <span class="keyword">local</span> setup = <span class="keyword">function</span>(scene)
+   <span class="keyword">local</span> e = L.Entity()
+   e:addComponent(L.Position(<span class="number">0</span>,<span class="number">0</span>))
+   e:addComponent(L.Sprite(<span class="string">"img/pac-man-logo.png"</span>, <span class="number">400</span>, <span class="number">85</span>))
+   scene:addEntity(e)
+ <span class="keyword">end</span>
+</pre>
+
+
+      </header>
+
+			<section id="details">
+			<article>
+
+
+			</article>
+    </section>
+  </section>
+</section>
+
+    </section>
+
+  </section><!-- #documentation -->
+
+  <div id="footer">
+    <p><a href="https://github.com/jasonallen">© Jason Allen</a></p>
+  </div>
+
+</body></html>
